@@ -1,6 +1,6 @@
 galaxy_info:
   author: Sean Ho
-  description: Template ansible role
+  description: SOCKS proxy using ssh to localhost
   company: Anchorlytics Consulting
   license: MIT
 
@@ -13,6 +13,9 @@ galaxy_info:
      - 10
 
   galaxy_tags:
-    - template
+    - proxy
+    - ssh
+    - socks
 
-dependencies: []
+dependencies: 
+  - role: systemd

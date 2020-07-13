@@ -1,0 +1,21 @@
+# {{ ansible_managed }}
+# Firewall rules for socks-proxy service
+{% set ipt = '/usr/sbin/iptables' %}
+{% set ch = 'in_socks' %}
+{% set in_rule = '-d ' ~ socks_ip ~ '/32 -p tcp --dport ' ~ socks_port ~ ' -j ' ~ ch %}
+
+[Service]
+# Setup ref to chain
+ExecStartPre=!-{{ ipt }} -N {{ ch }}
+ExecStartPre=!{{ ipt }} -F {{ ch }}
+ExecStartPre=!-{{ ipt }} -D INPUT {{ in_rule }}
+ExecStartPre=!{{ ipt }} -A INPUT {{ in_rule }}
+
+{% for rule in socks_iptables %}
+ExecStartPre=!-{{ ipt }} -A {{ ch }} {{ rule }}
+{% endfor %}
+
+# Cleanup: unref, flush, delete
+ExecStopPost=!-{{ ipt }} -D INPUT {{ in_rule }}
+ExecStopPost=!-{{ ipt }} -F {{ ch }}
+ExecStopPost=!-{{ ipt }} -X {{ ch }}

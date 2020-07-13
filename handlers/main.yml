@@ -1,1 +1,7 @@
 ---
+- name: restart socks-proxy
+  tags:
+    - service
+  service:
+    name: socks-proxy
+    state: restarted

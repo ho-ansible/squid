@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+[Unit]
+Description=SOCKS proxy using ssh
+After=network-online.target
+
+[Service]
+Type=notify
+ExecStart=/usr/bin/ssh -N -D {{ socks_ip }}:{{ socks_port }} localhost
+
+[Install]
+WantedBy=multi-user.target
