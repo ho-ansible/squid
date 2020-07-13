@@ -1,0 +1,17 @@
+# {{ ansible_managed }}
+
+http_port {{ squid_ip }}:{{ squid_port }}
+
+# ACLs
+acl clientnet src {{ squid_clientnet }}
+
+acl HTTPS_port port 443
+acl HTTPS_method method CONNECT
+acl pcl proto HTTP FTP
+
+# Access Rules
+http_access deny !pcl
+http_access deny HTTPS_method !HTTPS_port
+http_access deny to_localhost
+http_access allow clientnet
+http_access deny all

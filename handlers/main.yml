@@ -1,7 +1,7 @@
 ---
-- name: restart socks-proxy
+- name: restart squid
   tags:
     - service
   service:
-    name: socks-proxy
+    name: squid
     state: restarted

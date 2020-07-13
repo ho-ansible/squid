@@ -1,6 +1,6 @@
 galaxy_info:
   author: Sean Ho
-  description: SOCKS proxy using ssh to localhost
+  description: HTTP/S proxy server
   company: Anchorlytics Consulting
   license: MIT
 
@@ -14,8 +14,7 @@ galaxy_info:
 
   galaxy_tags:
     - proxy
-    - ssh
-    - socks
+    - http
 
 dependencies: 
   - role: systemd

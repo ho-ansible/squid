@@ -1,5 +1,6 @@
 ---
 
-socks_ip: 127.0.0.1
-socks_port: 1080
-socks_iptables: []
+squid_ip: 127.0.0.1
+squid_port: 3128
+squid_clientnet: 127.0.0.1/8
+squid_iptables: []

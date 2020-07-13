@@ -1,23 +1,48 @@
 ---
 
-- name: socks-proxy | systemd service
+- name: squid | install packages
+  tags:
+    - package
+  package:
+    name: squid
+  notify: restart squid
+
+- name: squid | config
+  tags:
+    - config
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/squid/{{ item }}"
+  loop:
+    - squid.conf
+  notify:
+    - restart squid
+
+- name: squid | systemd dir
+  tags:
+    - systemd
+    - dir 
+  file:
+    path: "{{ squid_systemd_dir }}"
+    state: directory
+
+- name: squid | firewall config
   tags:
     - systemd
     - config
   template:
-    src: "{{ item.src }}.j2"
-    dest: "/etc/systemd/system/socks-proxy.{{ item.dest | d }}{{ item.src }}"
+    src: "{{ item }}.j2"
+    dest: "{{ squid_systemd_dir }}/{{ item }}"
   loop:
-    - { src: service }
-    - { src: iptables.conf, dest: service.d/ }
+    - iptables.conf
   notify:
     - daemon-reload
-    - restart socks-proxy
+    - restart squid
 
-- name: socks-proxy | service
+- name: squid | service
   tags:
     - service
   service:
-    name: socks-proxy
+    name: squid
     state: started
     enabled: yes
