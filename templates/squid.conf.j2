@@ -9,7 +9,7 @@ acl HTTPS_ports port 443 5656
 acl HTTPS_method method CONNECT
 
 # Access Rules
-http_access deny HTTPS_method !HTTPS_port
+http_access deny HTTPS_method !HTTPS_ports
 http_access deny to_localhost
 http_access allow clientnet
 http_access deny all
