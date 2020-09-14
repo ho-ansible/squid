@@ -1,2 +1,2 @@
 ---
-squid_systemd_dir: /etc/systemd/system/squid.service.d
+squid_iptables_conf: /etc/systemd/system/squid.service.d/iptables.conf

@@ -18,12 +18,12 @@
   notify:
     - restart squid
 
-- name: squid | systemd dir
+- name: squid | firewall config dir
   tags:
     - systemd
     - dir 
   file:
-    path: "{{ squid_systemd_dir }}"
+    path: "{{ squid_iptables_conf | dirname }}"
     state: directory
 
 - name: squid | firewall config
@@ -31,10 +31,8 @@
     - systemd
     - config
   template:
-    src: "{{ item }}.j2"
-    dest: "{{ squid_systemd_dir }}/{{ item }}"
-  loop:
-    - iptables.conf
+    src: "iptables.conf.j2"
+    dest: "{{ squid_iptables_conf }}"
   notify:
     - daemon-reload
     - restart squid
