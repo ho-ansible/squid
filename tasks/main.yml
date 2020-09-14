@@ -2,44 +2,44 @@
 
 - name: squid | install packages
   tags:
-    - package
+  - package
   package:
     name: squid
   notify: restart squid
 
 - name: squid | config
   tags:
-    - config
+  - config
   template:
     src: "{{ item }}.j2"
     dest: "/etc/squid/{{ item }}"
   loop:
-    - squid.conf
+  - squid.conf
   notify:
-    - restart squid
+  - restart squid
 
 - name: squid | firewall config dir
   tags:
-    - systemd
-    - dir 
+  - systemd
+  - dir 
   file:
     path: "{{ squid_iptables_conf | dirname }}"
     state: directory
 
 - name: squid | firewall config
   tags:
-    - systemd
-    - config
+  - systemd
+  - config
   template:
     src: "iptables.conf.j2"
     dest: "{{ squid_iptables_conf }}"
   notify:
-    - daemon-reload
-    - restart squid
+  - daemon-reload
+  - restart squid
 
 - name: squid | service
   tags:
-    - service
+  - service
   service:
     name: squid
     state: started
