@@ -6,16 +6,11 @@ Only tested on Debian stable, for now.
 
 ## Role Variables
 
+## Playbooks
++ `main.yml`: apply role
+
 ## Dependencies
 + [ho-ansible.systemd](https://github.com/ho-ansible/systemd)
-
-## Example Playbook
-
-```
-- hosts: all
-  roles:
-    - { role: ho-ansible.squid }
-```
 
 ## License
 MIT

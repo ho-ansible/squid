@@ -1,0 +1,11 @@
+#! /usr/bin/env ansible-playbook
+# Configure squid caching forward web proxy
+# Replace 'proxy' with your own inventory group
+---
+- name: squid | caching web proxy
+  hosts: proxy
+  roles:
+  - role: squid
+    tags:
+    - squid
+    - proxy
