@@ -7,7 +7,6 @@ Only tested on Debian stable, for now.
 ## Role Variables
 + `squid_ip` (default: 127.0.0.1): interface to listen on
 + `squid_port` (default: 3128): TCP port to listen on
-+ `squid_clientnet` (default: 127.0.0.1/8): allow queries from this subnet
 + `squid_iptables`: list of additional iptables rules
 
 ## Playbooks

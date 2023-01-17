@@ -3,13 +3,12 @@
 http_port {{ squid_ip }}:{{ squid_port }}
 
 # ACLs
-acl clientnet src {{ squid_clientnet }}
-
+acl accessip localip {{ squid_ip | ipaddr('host') }}
 acl HTTPS_ports port 443 5656
 acl HTTPS_method method CONNECT
 
 # Access Rules
 http_access deny HTTPS_method !HTTPS_ports
 http_access deny to_localhost
-http_access allow clientnet
+http_access allow accessip
 http_access deny all
