@@ -2,4 +2,6 @@
 
 squid_ip: 127.0.0.1
 squid_port: 3128
+squid_acl: []
+squid_http: []
 squid_iptables: []

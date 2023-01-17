@@ -6,9 +6,15 @@ http_port {{ squid_ip }}:{{ squid_port }}
 acl accessip localip {{ squid_ip | ipaddr('host') }}
 acl HTTPS_ports port 443 5656
 acl HTTPS_method method CONNECT
+{% for acl in squid_acl | d() %}
+acl {{ acl }}
+{% endfor %}
 
 # Access Rules
 http_access deny HTTPS_method !HTTPS_ports
 http_access deny to_localhost
 http_access allow accessip
+{% for http_rule in squid_http | d() %}
+http_access {{ http_rule }}
+{% endfor %}
 http_access deny all

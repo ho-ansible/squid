@@ -8,6 +8,8 @@ Only tested on Debian stable, for now.
 + `squid_ip` (default: 127.0.0.1): interface to listen on
 + `squid_port` (default: 3128): TCP port to listen on
 + `squid_iptables`: list of additional iptables rules
++ `squid_acl`: list of additional ACL definitions
++ `squid_http`: list of additional HTTP access rules (`http_access`)
 
 ## Playbooks
 + `main.yml`: apply role
