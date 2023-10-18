@@ -3,7 +3,7 @@
 http_port {{ squid_ip }}:{{ squid_port }}
 
 # ACLs
-acl accessip localip {{ squid_ip | ipaddr('host') }}
+acl accessip localip {{ squid_ip | ansible.utils.ipaddr('host') }}
 acl HTTPS_ports port 443 5656
 acl HTTPS_method method CONNECT
 {% for acl in squid_acl | d() %}
